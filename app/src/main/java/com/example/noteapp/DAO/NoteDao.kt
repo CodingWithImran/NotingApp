@@ -1,5 +1,6 @@
 package com.example.noteapp.DAO
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -17,6 +18,9 @@ interface NoteDao {
     @Update
     fun update(note : NoteTable)
 
+//    Below two line used in observer for show liveData
+//    @Query ("Select * From 'note_table'")
+//    fun readNote() : LiveData<List <NoteTable>>
     @Query ("Select * From 'note_table'")
     fun readNote() : List <NoteTable>
 
