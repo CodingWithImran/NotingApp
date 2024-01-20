@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/back"
+        android:icon="@drawable/back"
+        android:title="back"
+        android:gravity = "start"
+        app:showAsAction="always"
+        android:actionLayout="@layout/menu_item_back"
+        />
+    <item
+        android:id="@+id/save"
+        android:icon="@drawable/save"
+        android:gravity="end"
+        android:title="back"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/write"
+        android:gravity="end"
+        android:icon="@drawable/view"
+        android:title="write"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/edit"
+        android:icon="@drawable/edit"
+        android:title="back"
+        android:gravity="end"
+        app:showAsAction="always" />
+</menu>

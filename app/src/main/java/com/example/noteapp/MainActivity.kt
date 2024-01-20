@@ -30,35 +30,35 @@ class MainActivity : AppCompatActivity() {
 //        Below commented line used for add liveDATA
 //        list.addAll(mainActivityViewModel.noteList.value!!)
 
-
+        list.clear()
         list.addAll(mainActivityViewModel.noteList)
         binding.recNote.layoutManager = LinearLayoutManager(this)
         adapter = NoteAdapters(this, list){
             deleteNote(it)
         }
         binding.recNote.adapter = adapter
-
+        adapter?.notifyDataSetChanged()
             // BELOW CODE ONLY USED FOR SHOW LIVE DATA IN OBSERVER WHICH WORK IN VIEWMODAL
-//        var observer = Observer<List<NoteTable>>{
-//            list.clear()
-//            list.addAll(it)
-//            if (adapter==null){
-//
-//                binding.recNote.layoutManager = LinearLayoutManager(this)
-//                adapter = NoteAdapters(this, list){
-//                    deleteNote(it)
-//                }
-//                binding.recNote.adapter = adapter
-//
-//            }else{
-//                adapter?.notifyDataSetChanged()
-//            }
-//        }
-//        mainActivityViewModel.noteList.observe(this, observer)
+        var observer = Observer<List<NoteTable>>{
+            list.clear()
+            list.addAll(it)
+            if (adapter==null){
 
-            // ✔✔✔✔✔✔✔ below two line code only was used for checking room data in recyclerView. Now it has been changed in Observer format in viewModal
-//        val noteDao = DatabaseBuilder.getDatabase(this)?.getNoteDao()
-//        list.addAll(mainActivityViewModel.noteList.value!!)
+                binding.recNote.layoutManager = LinearLayoutManager(this)
+                adapter = NoteAdapters(this, list){
+                    deleteNote(it)
+                }
+                binding.recNote.adapter = adapter
+
+            }else{
+                adapter?.notifyDataSetChanged()
+            }
+        }
+        mainActivityViewModel.noteList.observe(this, observer)
+
+//             ✔✔✔✔✔✔✔ below two line code only was used for checking room data in recyclerView. Now it has been changed in Observer format in viewModal
+        val noteDao = DatabaseBuilder.getDatabase(this)?.getNoteDao()
+        list.addAll(mainActivityViewModel.noteList.value!!)
         binding.addBtn.setOnClickListener {
             startActivity(Intent(this, AddActivity::class.java))
         }
@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
     }
     fun deleteNote(position : Int){
         mainActivityViewModel.delete(list.get(position))
-        list.removeAt(position)
-        adapter!!.notifyItemRemoved(position)
+//        list.removeAt(position)
+//        adapter!!.notifyItemRemoved(position)
     }
 }
